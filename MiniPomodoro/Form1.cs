@@ -13,7 +13,7 @@ namespace MiniPomodoro
 {
     public partial class Form1 : Form
     {
-        private readonly decimal WorkMinutes = 1M; //25; // 一个番茄的时间
+        private readonly decimal WorkMinutes = 25M; //25; // 一个番茄的时间
         private readonly decimal ShortRestMinutes = 5M; //5; // 休息时间
         private DateTime _startTime;
         private PomodoState _currentState;
