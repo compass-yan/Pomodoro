@@ -52,7 +52,7 @@
     <ApplicationIcon>res\Tomato_48.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>5A00433BDC50DA2E1ECEBF19D292BC7B02B5799C</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>17447CD7B1F3BFF53FA8C6CA1F018C7F66BDC779</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>MiniPomodoro_TemporaryKey.pfx</ManifestKeyFile>
@@ -61,7 +61,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.WindowsAPICodePack">
@@ -101,6 +101,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="MiniPomodoro_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
