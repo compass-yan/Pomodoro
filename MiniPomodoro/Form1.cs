@@ -14,10 +14,13 @@ namespace MiniPomodoro
     public partial class Form1 : Form
     {
         private readonly decimal WorkMinutes = 25M; //25; // 一个番茄的时间
-        private readonly decimal ShortRestMinutes = 5M; //5; // 休息时间
+        private static decimal RestMinutes = 5M;
+        private static decimal ShortRestMinutes = 5M; //5; // 短休息时间
         private DateTime _startTime;
         private PomodoState _currentState;
-
+        private static decimal LongRestMinutes = 20M;//长休息时间
+        private static int LongRestInterval = 4;//每四个番茄钟一个长休息
+        private static int PomodoCount = 1;
         public Form1()
         {
             InitializeComponent();
@@ -58,16 +61,29 @@ namespace MiniPomodoro
             {
                 if (elapsedMinutes >= WorkMinutes)
                 {
+                   
+
                     PlayNotice();
-                    StartRestPomodo();
+
+                    //判断是否该长休息，如果是长休息提示用户
+                    if (PomodoCount<LongRestInterval)
+                    {
+                        PomodoCount++;
+                        RestMinutes = ShortRestMinutes;
+                    }
+                    else
+                    {
+                        PomodoCount = 1;
+                        RestMinutes = LongRestMinutes;
+                    }
                 }
             }
             else if (_currentState == PomodoState.Resting)
             {
-                if (elapsedMinutes >= ShortRestMinutes)
+                if (elapsedMinutes >= RestMinutes)
                 {
                     timer1.Stop();
-                    MessageBox.Show("休息时间结束，即将开始新的番茄！","提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("休息时间已结束，点击按钮开始新的番茄！\r\n【番茄宣言】\r\n在某个番茄钟的过程里，如果突然想起要做什么事情:\r\na.非得马上做不可的话，停止这个番茄钟并宣告它作废（哪怕还剩5分钟就结束了），去完成这件事情，之后再重新开始同一个番茄钟；\r\n b.不是必须马上去做的话，在列表里该项任务后面标记一个逗号（表示打扰），并将这件事记在另一个列表里（比如叫“计划外事件”），然后接着完成这个番茄钟。","提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     timer1.Start();
                     StartWorkPomodo();
                 }
@@ -169,7 +185,7 @@ namespace MiniPomodoro
             }
             else if (_currentState == PomodoState.Resting)
             {
-                int progress = 100 - Convert.ToInt32(elapsedMinutes / ShortRestMinutes * 100);
+                int progress = 100 - Convert.ToInt32(elapsedMinutes / RestMinutes * 100);
                 int currentSecond = DateTime.Now.Second;
                 if (currentSecond%2 == 0)
                 {
@@ -192,9 +208,12 @@ namespace MiniPomodoro
         private void PlayNotice()
         {
             //string soundPath = Application.StartupPath+@"\res\sound\iPhone7.wav";
+            StartRestPomodo();
             SoundPlayer player = new SoundPlayer(Resources.iPhone7);
             player.Load();
-            player.Play();
+            player.Play() ;
+            MessageBox.Show("请停止工作，您可以休息"+RestMinutes+"分钟。趁这个时间您可以活动一下、喝水、方便等。","小贴士");
+         
         }
 
         /// <summary>
