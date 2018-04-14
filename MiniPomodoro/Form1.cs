@@ -13,12 +13,12 @@ namespace MiniPomodoro
 {
     public partial class Form1 : Form
     {
-        private readonly decimal WorkMinutes = 0.2M; //25; // 一个番茄的时间
-        private static decimal RestMinutes = 0.2M;
-        private static decimal ShortRestMinutes = 0.2M; //5; // 短休息时间
+        private readonly decimal WorkMinutes = 25M; //25; // 一个番茄的时间
+        private static decimal RestMinutes = 5M;
+        private static decimal ShortRestMinutes = 5M; //5; // 短休息时间
         private DateTime _startTime;
         private PomodoState _currentState;
-        private static decimal LongRestMinutes = 10M;//长休息时间
+        private static decimal LongRestMinutes = 15M;//长休息时间
         private static int LongRestInterval = 4;//每四个番茄钟一个长休息
         private static int PomodoCount = 1;
         Msg msgForm = new Msg();
