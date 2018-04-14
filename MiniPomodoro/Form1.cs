@@ -13,9 +13,9 @@ namespace MiniPomodoro
 {
     public partial class Form1 : Form
     {
-        private readonly decimal WorkMinutes = 25M; //25; // 一个番茄的时间
-        private static decimal RestMinutes = 5M;
-        private static decimal ShortRestMinutes = 5M; //5; // 短休息时间
+        private readonly decimal WorkMinutes = 0.2M; //25; // 一个番茄的时间
+        private static decimal RestMinutes = 0.2M;
+        private static decimal ShortRestMinutes = 0.2M; //5; // 短休息时间
         private DateTime _startTime;
         private PomodoState _currentState;
         private static decimal LongRestMinutes = 10M;//长休息时间
@@ -63,7 +63,6 @@ namespace MiniPomodoro
                 if (elapsedMinutes >= WorkMinutes)
                 {
                     //判断是否该长休息，如果是长休息提示用户
-                    PomodoCount = PomodoCount > LongRestInterval ? 1 : PomodoCount + 1;
                     if (PomodoCount == LongRestInterval)
                     {
                         RestMinutes = LongRestMinutes;
@@ -73,6 +72,7 @@ namespace MiniPomodoro
                         RestMinutes = ShortRestMinutes;
                     }
                     PlayNotice();
+                    PomodoCount = PomodoCount > LongRestInterval ? 1 : PomodoCount + 1;
                 }
             }
             else if (_currentState == PomodoState.Resting)
